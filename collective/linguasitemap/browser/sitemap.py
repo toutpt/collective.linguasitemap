@@ -1,28 +1,26 @@
 from plone.app.layout.sitemap import sitemap as base
-from BTrees.OOBTree import OOBTree
+from BTrees.OOBTree import OOBTree  # @UnresolvedImport
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from plone.app.layout.navigation.interfaces import INavigationRoot
 
-from Products.CMFCore.interfaces import ISiteRoot
-from zope.traversing.interfaces import IBeforeTraverseEvent
-
 from ZPublisher.BaseRequest import DefaultPublishTraverse
 
-import logging
+import logging  # @UnresolvedImport
 logger = logging.getLogger('test')
 
+
 class SiteMapTraverser(DefaultPublishTraverse):
-    
+
     def publishTraverse(self, request, name):
         """catch sitemap name"""
 
         #pre condition
         if not name.startswith('sitemap_') or not name.endswith('.xml.gz') or \
-           name == 'sitemap.xml.gz' or len(name) not in (17,19):
+           name == 'sitemap.xml.gz' or len(name) not in (17, 19):
             return super(SiteMapTraverser, self).publishTraverse(request, name)
 
-        logger.info('call for sitemap: %s'%name)
+        logger.info('call for sitemap: %s' % name)
 
         sitemap_view = self.context.restrictedTraverse('@@sitemap.xml.gz')
         language = self.extractLanguage(name)
@@ -31,12 +29,13 @@ class SiteMapTraverser(DefaultPublishTraverse):
             return super(SiteMapTraverser, self).publishTraverse(request, name)
 
         sitemap_view.language = language
-        sitemap_view.filename = 'sitemap_%s.xml.gz'%language
+        sitemap_view.filename = 'sitemap_%s.xml.gz' % language
         return sitemap_view
 
     def extractLanguage(self, name):
-        if type(name) not in (str, unicode): return
-        if name.startswith('sitemap') and len(name)>11 and '_' in name:
+        if type(name) not in (str, unicode):
+            return
+        if name.startswith('sitemap') and len(name) > 11 and '_' in name:
             sitemap = name.split('.')[0]
             lang = str(sitemap.split('_')[1])
 
@@ -61,11 +60,10 @@ class SiteMapView(base.SiteMapView):
         typesUseViewActionInListings = frozenset(
             siteProperties.getProperty('typesUseViewActionInListings', [])
             )
-        
+
         is_plone_site_root = IPloneSiteRoot.providedBy(self.context)
         if not is_plone_site_root:
             query['path'] = '/'.join(self.context.getPhysicalPath())
-
 
         query['is_default_page'] = True
         default_page_modified = OOBTree()
@@ -87,8 +85,6 @@ class SiteMapView(base.SiteMapView):
             yield {
                 'loc': loc,
                 'lastmod': lastmod,
-                #'changefreq': 'always', # hourly/daily/weekly/monthly/yearly/never
-                #'prioriy': 0.5, # 0.0 to 1.0
             }
 
         query['is_default_page'] = False
@@ -106,9 +102,8 @@ class SiteMapView(base.SiteMapView):
             yield {
                 'loc': loc,
                 'lastmod': lastmod,
-                #'changefreq': 'always', # hourly/daily/weekly/monthly/yearly/never
-                #'prioriy': 0.5, # 0.0 to 1.0
             }
+
 
 class NavigationRootSiteMapView(SiteMapView):
     """A sitemap that extract the language from the navigation root"""
@@ -118,4 +113,3 @@ class NavigationRootSiteMapView(SiteMapView):
         if is_navigation_root:
             self.language = self.context.Language()
         return super(NavigationRootSiteMapView, self).objects()
-

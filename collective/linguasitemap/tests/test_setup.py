@@ -2,6 +2,7 @@ import unittest2 as unittest
 from collective.linguasitemap.tests import base
 from plone.browserlayer import utils
 
+
 class TestSetup(base.IntegrationTestCase):
     """The name of the class should be meaningful. This may be a class that
     tests the installation of a particular product.
@@ -19,6 +20,7 @@ class TestSetup(base.IntegrationTestCase):
         layers = utils.registered_layers()
         self.assertIn(ILayer, layers)
 
+
 class TestUninstall(base.IntegrationTestCase):
     """Test if the addon uninstall well"""
 
@@ -31,6 +33,7 @@ class TestUninstall(base.IntegrationTestCase):
         from collective.linguasitemap.browser.interfaces import ILayer
         layers = utils.registered_layers()
         self.assertNotIn(ILayer, layers)
+
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)

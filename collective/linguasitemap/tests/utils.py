@@ -2,6 +2,7 @@ class FakeAcquisition(object):
     def __init__(self):
         self.aq_explicit = None
 
+
 class FakeContext(object):
 
     def __init__(self):
@@ -9,11 +10,11 @@ class FakeContext(object):
         self.title = "a title"
         self.description = "a description"
         self.creators = ["myself"]
-        self.date="a date"
+        self.date = "a date"
         self.aq_inner = FakeAcquisition()
         self.aq_inner.aq_explicit = self
         self._modified = "modified date"
-        self.remoteUrl = '' #fake Link
+        self.remoteUrl = ''  # fake Link
 
     def getId(self):
         return self.id
@@ -34,24 +35,22 @@ class FakeContext(object):
         return self._modified
 
     def getPhysicalPath(self):
-        return ('/','a','not','existing','path')
+        return ('/', 'a', 'not', 'existing', 'path')
 
     def getFolderContents(self, filter=None):
         catalog = FakeCatalog()
         return catalog.searchResults()
 
     def absolute_url(self):
-        return "http://nohost.com/"+self.id
+        return "http://nohost.com/" + self.id
 
-    def queryCatalog(self, **kwargs): #fake Topic
+    def queryCatalog(self, **kwargs):  # fake Topic
         catalog = FakeCatalog()
         return catalog.searchResults()
 
-    def getRemoteUrl(self): #fake Link
+    def getRemoteUrl(self):  # fake Link
         return self.remoteUrl
 
-    def modified(self): #for ram cache key
-        return "a modification date"
 
 class FakeBrain(object):
     def __init__(self):
@@ -69,6 +68,7 @@ class FakeBrain(object):
 
         return ob
 
+
 class FakeCatalog(object):
     def searchResults(self, **kwargs):
         brain1 = FakeBrain()
@@ -81,6 +81,7 @@ class FakeCatalog(object):
     def modified(self):
         return '654654654654'
 
+
 class FakeProperty(object):
     def __init__(self):
         self.photo_max_size = 400
@@ -88,6 +89,7 @@ class FakeProperty(object):
 
     def getProperty(self, name, default=None):
         return getattr(self, name, default)
+
 
 def fake_get_property(self):
     return FakeProperty()
