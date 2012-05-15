@@ -1,6 +1,6 @@
 import unittest2 as unittest
 from collective.linguasitemap import testing
-from plone.app import testing as ptesting  # @UnresolvedImport
+from plone.app import testing as ptesting
 from plone.browserlayer.layer import mark_layer
 
 

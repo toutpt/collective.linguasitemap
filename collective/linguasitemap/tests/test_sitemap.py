@@ -2,7 +2,7 @@ import unittest2 as unittest
 
 from zope import component
 from collective.linguasitemap.tests import base, utils
-from plone.testing.z2 import Browser  # @UnresolvedImport
+from plone.testing.z2 import Browser
 
 
 class UnitTestSiteMapView(unittest.TestCase):

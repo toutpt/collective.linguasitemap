@@ -6,7 +6,7 @@ from plone.app.layout.navigation.interfaces import INavigationRoot
 
 from ZPublisher.BaseRequest import DefaultPublishTraverse
 
-import logging  # @UnresolvedImport
+import logging
 logger = logging.getLogger('test')
 
 
