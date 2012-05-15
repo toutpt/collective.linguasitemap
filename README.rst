@@ -1,9 +1,9 @@
 Introduction
 ============
 
-This addon provide a sitemap_ per language for the Plone CMS. Each sitemap
-can be accessed with myplonesite.com/sitemap_XX.xml.gz where XX is the language
-code
+This addon provide a sitemap_ per language for the Plone CMS.
+Each sitemap can be accessed with myplonesite.com/sitemap.xml.gz?language=XX
+where XX is the language code
 
 How to install
 ==============

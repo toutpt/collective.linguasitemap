@@ -23,12 +23,13 @@
       layer=".interfaces.ILayer"
       permission="zope2.Public"
      />
-
+<!-- 
   <adapter
     for="Products.CMFCore.interfaces.ISiteRoot
          zope.publisher.interfaces.http.IHTTPRequest"
     provides="zope.publisher.interfaces.IPublishTraverse"
     factory=".sitemap.SiteMapTraverser"
     />
+-->
 
 </configure>

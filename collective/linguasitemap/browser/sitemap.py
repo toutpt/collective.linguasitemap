@@ -47,7 +47,10 @@ class SiteMapView(base.SiteMapView):
 
     def __init__(self, context, request):
         super(SiteMapView, self).__init__(context, request)
-        self.language = 'all'
+        if request:
+            self.language = request.get('language', 'all')
+        else:
+            self.language = 'all'
 
     def objects(self):
         """Returns the data to create the sitemap."""
