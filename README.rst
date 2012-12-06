@@ -25,8 +25,8 @@ Companies
 
 |makinacom|_
 
-  * `Planet Makina Corpus <http://www.makina-corpus.org>`_
-  * `Contact Makina-Corpus <mailto:python@makina-corpus.org>`_
+* `Planet Makina Corpus <http://www.makina-corpus.org>`_
+* `Contact Makina-Corpus <mailto:python@makina-corpus.org>`_
 
 
 People
